@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Sonia ❤️</title>
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      overflow: hidden;
+      background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.25);
+      padding: 50px;
+      border-radius: 30px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      max-width: 600px;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.7rem;
+      color: #ff2e63;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #222;
+      margin-bottom: 25px;
+    }
+
+    img {
+      width: 200px;
+      border-radius: 20px;
+      margin: 15px 0;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: #ff2e63;
+      color: white;
+      font-weight: bold;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: white;
+      color: #ff2e63;
+      font-weight: bold;
+      position: absolute;
+    }
+
+    #message {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.8rem;
+      color: #ff2e63;
+      font-weight: bold;
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="careless-cover.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="card">
+    <h1>Sonia ❤️</h1>
+
+    <p>
+      Happy 28 months Sonia, I love you...  
+      I have a question though
+    </p>
+
+    <!-- Optional photo -->
+    <img src="sonia.jpg" alt="Us together">
+
+    <h2>Will you be my Valentine? 🌹</h2>
+
+    <button id="yesBtn" onclick="yesClicked()">YES 💘</button>
+    <button id="noBtn">NO 😭</button>
+
+    <div id="message">
+      YAYYYYYYYYY 💃❤️  
+      Sonia, you are just amazing and u make me the happiest human alive.
+    </div>
+  </div>
+
+  <script>
+    /* YES Button */
+    function yesClicked() {
+      document.getElementById("message").style.display = "block";
+
+      // Play music after click
+      document.getElementById("bgMusic").play();
+
+      // Confetti blast
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+
+      // Second burst after 0.5s
+      setTimeout(() => {
+        confetti({
+          particleCount: 150,
+          spread: 120,
+          origin: { y: 0.4 }
+        });
+      }, 500);
+    }
+
+    /* NO Button Runs Away */
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 80);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    /* Floating Hearts Generator */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+
+      // Random position
+      heart.style.left = Math.random() * 100 + "vw";
+
+      // Bigger hearts (20px to 55px)
+      heart.style.fontSize = (Math.random() * 35 + 20) + "px";
+
+      // Faster float speed (3s to 5s)
+      heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+
+      document.body.appendChild(heart);
+
+      // Remove after 6 seconds
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    // More hearts spawn faster
+    setInterval(createHeart, 150);
+  </script>
+
+</body>
+</html>
